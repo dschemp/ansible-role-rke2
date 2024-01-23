@@ -1,2 +1,31 @@
 ---
 # defaults file for rke2
+
+## Channel to use for installing RKE2.
+## Can be 'stable', 'latest', 'testing' or a version like 'v1.29'.
+## See https://update.rke2.io/v1-release/channels for available options.
+rke2_install_channel: "stable"
+
+## The installation method to use. TODO: Determine via the system and make it overwritable.
+rke2_install_method: "rpm"
+
+## Set the type of service. Can be "server" or "agent".
+rke2_install_type: "server"
+
+## GitHub Release version of RKE2 to download from GitHub.
+## Should be in the format of 'v1.29.0+rke2r1' (Release) or 'v1.29.1-rc2+rke2r1' (Pre-Release).
+## See https://github.com/rancher/rke2/releases
+# rke2_install_version: ""
+
+## Installation prefix when using the 'tar' installation method.
+rke2_install_tar_prefix: "/opt/rke2"
+
+## NOT YET SUPPORTED!!!
+## Set a path prefix of a folder local to the Ansible controller containing
+## the installation files.
+## Can be used for airgap installations. Files won't be downloaded from the internet.
+# rke2_install_artifact_path: "/var/tmp"
+
+## If true, fapolicy rules won't be setup / will be skipped.
+## Should be kept at false.
+rke2_install_skip_fapolicy: false
