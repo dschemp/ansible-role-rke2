@@ -1,0 +1,4 @@
+---
+{% if rke2_server_tls_san is defined %}
+tls-san: {{ rke2_server_tls_san | to_json }}
+{% endif %}

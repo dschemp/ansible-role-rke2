@@ -1,0 +1,4 @@
+---
+- name: "Fail as tar installation is not implemented yet."
+  ansible.builtin.fail:
+    msg: "This installation method is not supported / implemented yet."

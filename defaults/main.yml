@@ -29,3 +29,20 @@ rke2_install_tar_prefix: "/opt/rke2"
 ## If true, fapolicy rules won't be setup / will be skipped.
 ## Should be kept at false.
 rke2_install_skip_fapolicy: false
+
+## --- Service configuration --- ##
+
+## Enable the RKE2 service after installation.
+rke2_service_enabled: true
+
+## Start the server after installation.
+rke2_service_started: true
+
+## --- Server configuration --- ##
+
+# rke2_server_tls_san: []
+
+## --- Agent configuration --- ##
+
+# rke2_agent_server_url: ""
+# rke2_agent_token: ""

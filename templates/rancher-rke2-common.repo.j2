@@ -1,0 +1,7 @@
+[rancher-rke2-common-{{ rke2_install_channel }}]
+name=Rancher RKE2 Common ({{ rke2_major_minor_version }})
+baseurl=https://{{ rke2_rpm_repo_site }}/rke2/{{ rke2_install_channel }}/centos/{{ ansible_distribution_major_version }}/noarch
+enabled=1
+gpgcheck=1
+repo_gpgcheck=0
+gpgkey=https://{{ rke2_rpm_repo_site }}/public.key

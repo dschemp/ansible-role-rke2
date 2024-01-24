@@ -1,2 +1,17 @@
 ---
 # vars file for rke2
+rke2_github_url: "https://github.com/rancher/rke2"
+
+rke2_channel_api_url: "https://update.rke2.io/v1-release/channels"
+
+rke2_rpm_repo_site: "rpm.rancher.io"
+
+rke2_package_arch: "{{ __rke2_architecture_mapping[ansible_architecture] }}"
+rke2_package_suffix: "{{ ansible_system | lower }}-{{ rke2_package_arch }}"
+
+__rke2_architecture_mapping:
+  "x86_64": "amd64"
+  "amd64": "amd64"
+  "aarch64": "arm64"
+  "arm64": "arm64"
+  "s390x": "s390x"

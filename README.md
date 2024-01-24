@@ -1,7 +1,8 @@
 Ansible Role: rke2
 =========
 
-An Ansible role for deploying Netbox.
+An Ansible role for deploying RKE2 (Rancher Kubernetes Engine 2).
+This Ansible role is based on the install shell script available on https://get.rke2.io.
 
 Requirements
 ------------

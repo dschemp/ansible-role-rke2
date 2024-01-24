@@ -1,2 +1,43 @@
 ---
 # tasks file for rke2
+- name: "Create configuration directory."
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    mode: "0755"
+    state: "directory"
+  loop:
+    - "/etc/rancher"
+    - "/etc/rancher/rke2"
+
+- name: "Copy RKE2 configuration."
+  become: true
+  ansible.builtin.copy:
+    content: |
+      {{ rke2_install_configuration }}
+    dest: "/etc/rancher/rke2/config.yaml"
+    mode: "0640"
+
+- name: "Install via rpm package."
+  when: "rke2_install_method == 'rpm'"
+  ansible.builtin.include_tasks: "install-rpm.yml"
+
+- name: "Install via tar archive."
+  when: "rke2_install_method == 'tar'"
+  ansible.builtin.include_tasks: "install-tar.yml"
+
+- name: "Setup fapolicy rules."
+  when:
+    - "rke2_install_skip_fapolicy | bool"
+    - "ansible_os_family == 'RedHat'"
+  ansible.builtin.include_tasks: "setup-fapolicy.yml"
+
+- name: "Flush handlers."
+  ansible.builtin.meta: "flush_handlers"
+
+- name: "Set service state."
+  become: true
+  ansible.builtin.service:
+    name: "rke2-{{ rke2_install_type }}"
+    enabled: "{{ rke2_service_enabled }}"
+    state: "{{ 'started' if rke2_service_started else 'stopped' }}"

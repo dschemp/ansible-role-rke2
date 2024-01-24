@@ -1,0 +1,12 @@
+---
+# TODO: Check if fapolicy exists.
+
+# TODO: Setup fapolicy only, when fapolicy exists.
+- name: "Setup fapolicy rules."
+  become: true
+  ansible.builtin.template:
+    src: "fapolicy-rke2.rules.j2"
+    dest: "/etc/fapolicyd/rules.d/80-rke2.rules"
+    mode: "0644"
+  notify:
+    - "Restart fapolicyd."

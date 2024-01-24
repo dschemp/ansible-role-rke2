@@ -1,0 +1,26 @@
+---
+- name: "Setup RKE2 rpm repositories."
+  become: true
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "/etc/yum.repos.d/{{ item.dest }}"
+    mode: "0644"
+  loop:
+    - src: "rancher-rke2-common.repo.j2"
+      dest: "rancher-rke2-common.repo"
+    - src: "rancher-rke2.repo.j2"
+      dest: "rancher-rke2.repo"
+
+- name: "Set package name."
+  ansible.builtin.set_fact:
+    rke2_install_package: >-
+      rke2-{{ rke2_install_type }}
+      {%- if rke2_install_version is defined -%}
+      -{{ rke2_install_version | regex_replace('[\+-]', '~') | regex_replace('v(.+)', '\1') }}
+      {%- endif -%}
+
+- name: "Install package."
+  become: true
+  ansible.builtin.package:
+    name: "{{ rke2_install_package }}"
+    update_cache: true
