@@ -15,3 +15,9 @@ __rke2_architecture_mapping:
   "aarch64": "arm64"
   "arm64": "arm64"
   "s390x": "s390x"
+
+__rke2_node_labels_keys: "{{ rke2_node_labels | dict2items | map(attribute='key') | map('trim') }}"
+__rke2_node_labels_values: "{{ rke2_node_labels | dict2items | map(attribute='value') | map('trim') }}"
+__rke2_node_labels: "{{ __rke2_node_labels_keys | zip(__rke2_node_labels_values) | map('join', '=') }}"
+
+rke2_selinux_enabled: "{{ (ansible_facts.selinux.status == 'enabled') | bool }}"

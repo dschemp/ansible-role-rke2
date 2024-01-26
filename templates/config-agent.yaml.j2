@@ -1,3 +1,20 @@
 ---
-server: {{ rke2_agent_server_url }}
-token: {{ rke2_agent_token }}
+{{ ansible_managed | comment }}
+
+# See https://docs.rke2.io/reference/linux_agent_config
+
+## Cluster
+token: {{ rke2_cluster_agent_token | default(rke2_cluster_token) | to_json }}
+server: {{ rke2_cluster_server_url | to_json }}
+
+## Node
+{% if rke2_node_name is defined %}
+node-name: {{ rke2_node_name | to_json }}
+{% endif %}
+node-label: {{ __rke2_node_labels | to_json }}
+selinux: {{ rke2_selinux_enabled | to_json }}
+
+## Additional Configuration / Miscellaneous
+{% if rke2_additional_config is defined %}
+{{ rke2_additional_config }}
+{% endif %}

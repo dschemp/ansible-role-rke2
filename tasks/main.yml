@@ -1,5 +1,7 @@
 ---
-# tasks file for rke2
+- name: "Import NetworkManager configuration."
+  ansible.builtin.import_tasks: "configure-nm.yml"
+
 - name: "Create configuration directory."
   become: true
   ansible.builtin.file:
@@ -12,11 +14,15 @@
 
 - name: "Copy RKE2 configuration."
   become: true
-  ansible.builtin.copy:
-    content: |
-      {{ rke2_install_configuration }}
+  ansible.builtin.template:
+    src: "config-{{ rke2_install_type }}.yaml.j2"
     dest: "/etc/rancher/rke2/config.yaml"
     mode: "0640"
+  notify:
+    - "Set service state."
+
+- name: "Import version determination."
+  ansible.builtin.import_tasks: "determine-version.yml"
 
 - name: "Install via rpm package."
   when: "rke2_install_method == 'rpm'"
@@ -34,10 +40,3 @@
 
 - name: "Flush handlers."
   ansible.builtin.meta: "flush_handlers"
-
-- name: "Set service state."
-  become: true
-  ansible.builtin.service:
-    name: "rke2-{{ rke2_install_type }}"
-    enabled: "{{ rke2_service_enabled }}"
-    state: "{{ 'started' if rke2_service_started else 'stopped' }}"

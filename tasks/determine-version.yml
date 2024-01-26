@@ -1,0 +1,30 @@
+---
+- name: "Extract major-minor from install channel."
+  when: "rke2_install_channel is regex('v([0-9]+\\.[0-9]+).*')"
+  ansible.builtin.set_fact:
+    rke2_major_minor_version: "{{ rke2_install_channel | regex_replace('^v([0-9]+\\.[0-9]+).*', '\\1') }}"
+
+- name: "Extract from API."
+  when:
+    - "rke2_install_channel is not regex('v([0-9]+\\.[0-9]+).*')"
+    - "rke2_install_version is undefined"
+  block:
+    - name: "Request channel."
+      ansible.builtin.uri:
+        url: "{{ rke2_channel_api_url }}"
+      register: "rke2_api_channels"
+
+    - name: "Find channel entry."
+      ansible.builtin.set_fact:
+        rke2_channel: "{{ rke2_api_channels.json.data | selectattr('name', '==', rke2_install_channel) | first }}"
+
+    - name: "Set install version."
+      ansible.builtin.set_fact:
+        rke2_install_version: "{{ rke2_channel.latest }}"
+
+- name: "Extract major-minor from install version."
+  when:
+    - "rke2_install_version is defined"
+    - "rke2_install_version is regex('v([0-9]+\\.[0-9]+).*')"
+  ansible.builtin.set_fact:
+    rke2_major_minor_version: "{{ rke2_install_version | regex_replace('^v([0-9]+\\.[0-9]+).*', '\\1') }}"

@@ -1,6 +1,8 @@
+{{ ansible_managed | comment }}
+
 [rancher-rke2-{{ rke2_major_minor_version }}-{{ rke2_install_channel }}]
-name=Rancher RKE2 ({{ rke2_major_minor_version }})
-baseurl=https://{{ rke2_rpm_repo_site }}/rke2/{{ rke2_install_channel }}/{{ rke2_major_minor_version }}/centos/{{ ansible_distribution_major_version }}/x86_64
+name=Rancher RKE2 {{ rke2_major_minor_version }} ({{ rke2_install_channel }})
+baseurl=https://{{ rke2_rpm_repo_site }}/rke2/{{ rke2_install_channel }}/{{ rke2_major_minor_version }}/centos/{{ rke2_os_major_version }}/x86_64
 enabled=1
 gpgcheck=1
 repo_gpgcheck=0

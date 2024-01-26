@@ -38,11 +38,31 @@ rke2_service_enabled: true
 ## Start the server after installation.
 rke2_service_started: true
 
+## --- General configuration --- ##
+
+## Server to connect to for joining that cluster.
+# rke2_cluster_server_url: ""
+## Shared token used for servers and agents to join that cluster.
+# rke2_cluster_token: ""
+## Shared token used only for agents to join that cluster.
+# rke2_cluster_agent_token: ""
+
+## See https://kubernetes.io/docs/reference/labels-annotations-taints
+## for some well-known labels.
+rke2_node_labels:
+  kubernetes.io/os: "{{ ansible_system | lower }}"
+  kubernetes.io/arch: "{{ rke2_package_arch }}" # Is defined in vars/main.yml
+  # topology.kubernetes.io/region: "eu-de"
+  # topology.kubernetes.io/zone: "eu-de-fsn1"
+
+## Allows you to configure additional properties
+## which are not handled by this role.
+## The content will be pasted as is at the end of the config file.
+# rke2_additional_config: ""
+
 ## --- Server configuration --- ##
 
-# rke2_server_tls_san: []
+rke2_server_tls_san: []
 
-## --- Agent configuration --- ##
-
-# rke2_agent_server_url: ""
-# rke2_agent_token: ""
+rke2_server_kubeconfig_path: "/etc/rancher/rke2/rke2.yaml"
+rke2_server_kubeconfig_mode: "0644"

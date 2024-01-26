@@ -1,4 +1,34 @@
 ---
-{% if rke2_server_tls_san is defined %}
-tls-san: {{ rke2_server_tls_san | to_json }}
+{{ ansible_managed | comment }}
+
+# See https://docs.rke2.io/reference/server_config
+
+## Cluster
+write-kubeconfig: {{ rke2_server_kubeconfig_path | to_json }}
+write-kubeconfig-mode: {{ rke2_server_kubeconfig_mode | to_json }}
+{% if rke2_cluster_token is defined %}
+token: {{ rke2_cluster_token | to_json }}
+{% endif %}
+{% if rke2_cluster_agent_token is defined %}
+agent-token: {{ rke2_cluster_agent_token | to_json }}
+{% endif %}
+{% if rke2_cluster_server_url is defined %}
+server: {{ rke2_cluster_server_url | to_json }}
+{% endif %}
+
+## Listener
+{% if rke2_cluster_server_url_tls_san is defined %}
+tls-san: {{ rke2_cluster_server_url_tls_san | to_json }}
+{% endif %}
+
+## Agent/Node
+{% if rke2_node_name is defined %}
+node-name: {{ rke2_node_name | to_json }}
+{% endif %}
+node-label: {{ __rke2_node_labels | to_json }}
+selinux: {{ rke2_selinux_enabled | to_json }}
+
+## Additional Configuration / Miscellaneous
+{% if rke2_additional_config is defined %}
+{{ rke2_additional_config }}
 {% endif %}

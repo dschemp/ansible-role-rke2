@@ -1,0 +1,21 @@
+---
+- name: "Converge servers."
+  hosts: "servers"
+  become: true
+  vars_files:
+    - "rke2-cluster.yml"
+  vars:
+    rke2_install_type: "server"
+  roles:
+    - "dschemp.rke2"
+
+- name: "Converge agents."
+  hosts: "agents"
+  become: true
+  vars_files:
+    - "rke2-cluster.yml"
+  vars:
+    rke2_install_type: "agent"
+    rke2_cluster_server_url: "https://rke2-server:6443"
+  roles:
+    - "dschemp.rke2"

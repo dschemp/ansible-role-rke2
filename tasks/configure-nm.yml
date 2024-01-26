@@ -1,0 +1,13 @@
+---
+- name: "Get service facts."
+  ansible.builtin.service_facts: {}
+
+- name: "Configure NetworkManager."
+  when: "'NetworkManager.service' in ansible_facts.services"
+  become: true
+  ansible.builtin.template:
+    src: "rke2-canal.conf.j2"
+    dest: "/etc/NetworkManager/conf.d/rke2-canal.conf"
+    mode: "0644"
+  notify:
+    - "Inform user about change in NetworkManager."
