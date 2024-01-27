@@ -49,11 +49,9 @@ rke2_service_started: true
 
 ## See https://kubernetes.io/docs/reference/labels-annotations-taints
 ## for some well-known labels.
-rke2_node_labels:
-  kubernetes.io/os: "{{ ansible_system | lower }}"
-  kubernetes.io/arch: "{{ rke2_package_arch }}" # Is defined in vars/main.yml
-  # topology.kubernetes.io/region: "eu-de"
-  # topology.kubernetes.io/zone: "eu-de-fsn1"
+# rke2_node_labels:
+#   topology.kubernetes.io/region: "eu-de"
+#   topology.kubernetes.io/zone: "eu-de-fsn1"
 
 ## Overwrite the node name. Defaults to the systems hostname.
 # rke2_node_name: ""
@@ -69,3 +67,5 @@ rke2_server_tls_san: []
 
 rke2_server_kubeconfig_path: "/etc/rancher/rke2/rke2.yaml"
 rke2_server_kubeconfig_mode: "0644"
+
+## TODO: Implement https://docs.rke2.io/install/server_roles
