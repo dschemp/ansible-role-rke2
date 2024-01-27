@@ -55,6 +55,9 @@ rke2_node_labels:
   # topology.kubernetes.io/region: "eu-de"
   # topology.kubernetes.io/zone: "eu-de-fsn1"
 
+## Overwrite the node name. Defaults to the systems hostname.
+# rke2_node_name: ""
+
 ## Allows you to configure additional properties
 ## which are not handled by this role.
 ## The content will be pasted as is at the end of the config file.

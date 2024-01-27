@@ -16,6 +16,6 @@
     - "rke2-cluster.yml"
   vars:
     rke2_install_type: "agent"
-    rke2_cluster_server_url: "https://rke2-server:6443"
+    rke2_cluster_server_url: "https://rke2-server:9345"
   roles:
     - "dschemp.rke2"
