@@ -49,6 +49,7 @@ rke2_service_started: true
 
 ## See https://kubernetes.io/docs/reference/labels-annotations-taints
 ## for some well-known labels.
+rke2_node_labels: {}
 # rke2_node_labels:
 #   topology.kubernetes.io/region: "eu-de"
 #   topology.kubernetes.io/zone: "eu-de-fsn1"
