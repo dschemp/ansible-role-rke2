@@ -64,9 +64,24 @@ rke2_node_labels: {}
 
 ## --- Server configuration --- ##
 
-rke2_server_tls_san: []
+rke2_server_tls_sans: []
 
 rke2_server_kubeconfig_path: "/etc/rancher/rke2/rke2.yaml"
 rke2_server_kubeconfig_mode: "0644"
 
 ## TODO: Implement https://docs.rke2.io/install/server_roles
+
+## --- Cluster configuration --- ##
+
+## Internal cluster domain
+# rke2_cluster_domain: "cluster.local"
+
+## Networking CIDR for pods
+rke2_pod_cidr: "100.64.0.0/16"
+## Networking CIDR for services
+rke2_service_cidr: "100.100.0.0/16"
+## IPv4 Cluster IP for coredns service. Should be in your service-cidr range
+rke2_cluster_dns_ip: "100.100.0.10"
+
+## CNI Plugins to deploy: "none", "calico", "canal" or "cilium"
+# rke2_networking_plugin: "canal"

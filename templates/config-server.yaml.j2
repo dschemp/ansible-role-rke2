@@ -15,9 +15,19 @@ agent-token: {{ rke2_cluster_agent_token | to_json }}
 {% if rke2_cluster_server_url is defined %}
 server: {{ rke2_cluster_server_url | to_json }}
 {% endif %}
+{% if rke2_cluster_domain is defined %}
+cluster-domain: {{ rke2_cluster_domain | to_json }}
+{% endif %}
+{% if rke2_networking_plugin is defined %}
+cni: {{ rke2_networking_plugin | to_json }}
+{% endif %}
+
+cluster-cidr: {{ rke2_pod_cidr | to_json }}
+service-cidr: {{ rke2_service_cidr | to_json }}
+cluster-dns: {{ rke2_cluster_dns_ip | to_json }}
 
 ## Listener
-tls-san: {{ rke2_server_tls_san | to_json }}
+tls-san: {{ rke2_server_tls_sans | to_json }}
 
 ## Agent/Node
 {% if rke2_node_name is defined %}
