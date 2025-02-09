@@ -34,6 +34,7 @@ tls-san: {{ rke2_server_tls_sans | to_json }}
 node-name: {{ rke2_node_name | to_json }}
 {% endif %}
 node-label: {{ __rke2_node_labels | to_json }}
+node-taint: {{ rke2_node_taints | to_json }}
 selinux: {{ rke2_selinux_enabled | to_json }}
 
 ## Additional Configuration / Miscellaneous

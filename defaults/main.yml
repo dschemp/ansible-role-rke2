@@ -53,6 +53,7 @@ rke2_node_labels: {}
 # rke2_node_labels:
 #   topology.kubernetes.io/region: "eu-de"
 #   topology.kubernetes.io/zone: "eu-de-fsn1"
+rke2_node_taints: []
 
 ## Overwrite the node name. Defaults to the systems hostname.
 # rke2_node_name: ""
@@ -68,6 +69,9 @@ rke2_server_tls_sans: []
 
 rke2_server_kubeconfig_path: "/etc/rancher/rke2/admin-kubeconfig.yaml"
 rke2_server_kubeconfig_mode: "0644"
+
+# If false, the taint "CriticalAddonsOnly=true:NoExecute" will be added.
+rke2_server_allow_workload: false
 
 ## TODO: Implement https://docs.rke2.io/install/server_roles
 

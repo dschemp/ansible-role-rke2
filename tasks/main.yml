@@ -1,4 +1,7 @@
 ---
+- name: "Import variables tasks."
+  ansible.builtin.import_tasks: "set_vars.yml"
+
 - name: "Import NetworkManager configuration."
   ansible.builtin.import_tasks: "configure-nm.yml"
 
