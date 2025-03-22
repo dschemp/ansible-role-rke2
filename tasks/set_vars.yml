@@ -18,3 +18,18 @@
     - "not rke2_server_allow_workload"
   ansible.builtin.set_fact:
     rke2_node_taints: "{{ rke2_node_taints | default([]) + ['CriticalAddonsOnly=true:NoExecute'] }}"
+
+- name: "Disable built-in CoreDNS deployment."
+  when: "not rke2_server_coredns_enabled"
+  ansible.builtin.set_fact:
+    __rke2_server_disabled_components: "{{ __rke2_server_disabled_components + ['rke2-coredns'] }}"
+
+- name: "Disable built-in Ingress Nginx deployment."
+  when: "not rke2_server_ingress_nginx_enabled"
+  ansible.builtin.set_fact:
+    __rke2_server_disabled_components: "{{ __rke2_server_disabled_components + ['rke2-ingress-nginx'] }}"
+
+- name: "Disable built-in Metrics Server deployment."
+  when: "not rke2_server_metrics_server_enabled"
+  ansible.builtin.set_fact:
+    __rke2_server_disabled_components: "{{ __rke2_server_disabled_components + ['rke2-metrics-server'] }}"

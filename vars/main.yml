@@ -21,3 +21,5 @@ __rke2_node_labels_values: "{{ rke2_node_labels | dict2items | map(attribute='va
 __rke2_node_labels: "{{ __rke2_node_labels_keys | zip(__rke2_node_labels_values) | map('join', '=') }}"
 
 rke2_selinux_enabled: "{{ (ansible_facts.selinux.status == 'enabled') | bool }}"
+
+__rke2_server_disabled_components: []

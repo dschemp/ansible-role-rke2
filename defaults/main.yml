@@ -73,6 +73,10 @@ rke2_server_kubeconfig_mode: "0644"
 # If false, the taint "CriticalAddonsOnly=true:NoExecute" will be added.
 rke2_server_allow_workload: false
 
+rke2_server_coredns_enabled: true
+rke2_server_ingress_nginx_enabled: false
+rke2_server_metrics_server_enabled: true
+
 ## TODO: Implement https://docs.rke2.io/install/server_roles
 
 ## --- Cluster configuration --- ##

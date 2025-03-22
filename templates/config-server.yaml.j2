@@ -21,6 +21,9 @@ cluster-domain: {{ rke2_cluster_domain | to_json }}
 {% if rke2_networking_plugin is defined %}
 cni: {{ rke2_networking_plugin | to_json }}
 {% endif %}
+{% if __rke2_server_disabled_components | length > 0 %}
+disable: {{ __rke2_server_disabled_components | join(',') | to_json }}
+{% endif %}
 
 cluster-cidr: {{ rke2_pod_cidr | to_json }}
 service-cidr: {{ rke2_service_cidr | to_json }}
