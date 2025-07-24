@@ -23,3 +23,7 @@ __rke2_node_labels: "{{ __rke2_node_labels_keys | zip(__rke2_node_labels_values)
 rke2_selinux_enabled: "{{ (ansible_facts.selinux.status == 'enabled') | bool }}"
 
 __rke2_server_disabled_components: []
+
+## Used when setting a specific major-minor version on a repo installation
+## as the major-minor branch is part of the "stable" or "latest" channel.
+rke2_install_channel_fallback: "stable"
