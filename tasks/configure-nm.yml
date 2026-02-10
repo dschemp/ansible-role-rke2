@@ -9,5 +9,4 @@
     src: "rke2-canal.conf.j2"
     dest: "/etc/NetworkManager/conf.d/rke2-canal.conf"
     mode: "0644"
-  notify:
-    - "Inform user about change in NetworkManager."
+  notify: "Restart NetworkManager."

@@ -12,8 +12,8 @@
     enabled: "{{ rke2_service_enabled }}"
     state: "{{ 'restarted' if rke2_service_started else 'stopped' }}"
 
-- name: "Inform user about change in NetworkManager."
-  ansible.builtin.debug:
-    msg:
-      - "The local NetworkManager configuration has been altered for RKE2 to work."
-      - "This might require a restart of the maschine."
+- name: "Restart NetworkManager."
+  become: true
+  ansible.builtin.service:
+    name: "NetworkManager"
+    state: "restarted"
