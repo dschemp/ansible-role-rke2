@@ -31,5 +31,4 @@
   ansible.builtin.package:
     name: "{{ rke2_install_package }}"
     update_cache: true
-  notify:
-    - "Set service state."
+  notify: "Set service state."

@@ -21,8 +21,7 @@
     src: "config-{{ rke2_install_type }}.yaml.j2"
     dest: "/etc/rancher/rke2/config.yaml"
     mode: "0640"
-  notify:
-    - "Set service state."
+  notify: "Set service state."
 
 - name: "Import version determination."
   ansible.builtin.import_tasks: "determine-version.yml"

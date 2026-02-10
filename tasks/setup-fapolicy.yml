@@ -8,5 +8,4 @@
     src: "fapolicy-rke2.rules.j2"
     dest: "/etc/fapolicyd/rules.d/80-rke2.rules"
     mode: "0644"
-  notify:
-    - "Restart fapolicyd."
+  notify: "Restart fapolicyd."
