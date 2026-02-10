@@ -28,7 +28,7 @@ rke2_install_tar_prefix: "/opt/rke2"
 
 ## If true, fapolicy rules won't be setup / will be skipped.
 ## Should be kept at false.
-rke2_install_skip_fapolicy: false
+rke2_skip_fapolicy_setup: false
 
 ## --- Service configuration --- ##
 

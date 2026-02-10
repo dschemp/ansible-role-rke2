@@ -37,7 +37,7 @@
 
 - name: "Setup fapolicy rules."
   when:
-    - "rke2_install_skip_fapolicy | bool"
+    - "rke2_skip_fapolicy_setup | bool"
     - "ansible_os_family == 'RedHat'"
   ansible.builtin.include_tasks: "setup-fapolicy.yml"
 
