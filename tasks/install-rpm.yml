@@ -15,6 +15,8 @@
       dest: "rancher-rke2-common.repo"
     - src: "rancher-rke2.repo.j2"
       dest: "rancher-rke2.repo"
+  loop_control:
+    label: "{{ item.dest }}"
 
 - name: "Set package name."
   ansible.builtin.set_fact:
