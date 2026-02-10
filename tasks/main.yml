@@ -37,7 +37,7 @@
 - name: "Setup fapolicy rules."
   when:
     - "rke2_skip_fapolicy_setup | bool"
-    - "ansible_os_family == 'RedHat'"
+    - "ansible_facts['os_family'] == 'RedHat'"
   ansible.builtin.include_tasks: "setup-fapolicy.yml"
 
 - name: "Flush handlers."

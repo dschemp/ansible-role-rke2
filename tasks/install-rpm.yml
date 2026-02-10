@@ -1,8 +1,8 @@
 ---
 - name: "Set OS major version (RedHat)."
-  when: "ansible_os_family == 'RedHat'"
+  when: "ansible_facts['os_family'] == 'RedHat'"
   ansible.builtin.set_fact:
-    rke2_os_major_version: "{{ ansible_distribution_major_version }}"
+    rke2_os_major_version: "{{ ansible_facts['distribution_major_version'] }}"
 
 - name: "Setup RKE2 rpm repositories."
   become: true

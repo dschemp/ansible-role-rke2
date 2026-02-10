@@ -6,8 +6,8 @@ rke2_channel_api_url: "https://update.rke2.io/v1-release/channels"
 
 rke2_rpm_repo_site: "rpm.rancher.io"
 
-rke2_package_arch: "{{ __rke2_architecture_mapping[ansible_architecture] }}"
-rke2_package_suffix: "{{ ansible_system | lower }}-{{ rke2_package_arch }}"
+rke2_package_arch: "{{ __rke2_architecture_mapping[ansible_facts['architecture']] }}"
+rke2_package_suffix: "{{ ansible_facts['system'] | lower }}-{{ rke2_package_arch }}"
 
 __rke2_architecture_mapping:
   "x86_64": "amd64"
@@ -20,7 +20,7 @@ __rke2_node_labels_keys: "{{ rke2_node_labels | dict2items | map(attribute='key'
 __rke2_node_labels_values: "{{ rke2_node_labels | dict2items | map(attribute='value') | map('trim') }}"
 __rke2_node_labels: "{{ __rke2_node_labels_keys | zip(__rke2_node_labels_values) | map('join', '=') }}"
 
-rke2_selinux_enabled: "{{ (ansible_facts.selinux.status == 'enabled') | bool }}"
+rke2_selinux_enabled: "{{ (ansible_facts['selinux']['status'] == 'enabled') | bool }}"
 
 __rke2_server_disabled_components: []
 
